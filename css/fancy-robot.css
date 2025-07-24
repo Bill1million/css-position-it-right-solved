@@ -1,31 +1,293 @@
+:root {
+  --zombie: #3f413b;
+  --flesh: linear-gradient(
+    to right,
+    #3f413b 0%,
+    /* mottled greenish-gray skin */ #81857a 25%,
+    /* dead taupe */ #77725a 50%,
+    /* bruised tissue */ #bda666 75%,
+    /* dried blood */ #d6ad6f 100% /* deep necrosis */
+  );
+  --comp-screen: repeating-linear-gradient(
+    to bottom,
+    #000000 0px,
+    #000000 1px,
+    #0ad603 2px
+  );
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .robot-container {
+  position: relative;
+  margin: auto;
+  box-sizing: border-box;
 }
 
 .robot-face-shape {
+  position: absolute;
+  border: 5px solid var(--zombie);
+  border-radius: 5px 35% 35% 5px;
+  width: 36rem;
+  height: 20rem;
+  align-self: center;
+  justify-self: center;
+  background: var(--flesh);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+/* eyes spiral */
+.spiral {
+  --b: 5px; /* border thickness */
+  --s: 150px; /* preferred size shape */
+  --c: #0c7e08;
+
+  width: round(var(--s), 4 * var(--b));
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+        calc(2 * var(--b)) at top,
+        #0000 -1px,
+        var(--c) 0 calc(50% - 1px),
+        #0000 50% calc(100% - 1px)
+      )
+      calc(50% + var(--b)) 100%,
+    repeating-radial-gradient(
+        calc(2 * var(--b)) at bottom,
+        var(--c) -1px,
+        #0000 0 calc(50% - 1px),
+        var(--c) 50% calc(100% - 1px)
+      )
+      50% 0;
+  background-size: 150% 50%;
+  background-repeat: no-repeat;
+  mask: radial-gradient(
+        calc(1.5 * var(--b)) at calc(100% - var(--b) / 2) 0,
+        #0000 calc(100% / 3),
+        #000 calc(100% / 3 + 1px) 110%,
+        #0000 0
+      )
+      calc(50% + var(--b) / 2) 100% / calc(3 * var(--b)) 50% exclude no-repeat,
+    conic-gradient(#000 0 0);
+}
+
+/*eyes sphere */
+.eye {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    #000 0%,
+    /* Pupil core */ #0055aa 5%,
+    /* Deep blue iris */ #3399ff 20%,
+    /* Lighter blue ring */ #aad4ff 35%,
+    /* Faint outer iris */ #ffffff 60% /* Eye white */
+  );
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3); /* Adds depth */
+  border: 2px solid #ccc; /* Eyeball edge */
+}
+
+/* infinity nose */
+.infinity {
+  --s: 34px; /* control the size */
+  --b: 14px; /* the border thickness */
+  display: inline-flex;
+  gap: calc((sqrt(2) - 1) * var(--s) - sqrt(2) * var(--b));
+}
+.infinity:before,
+.infinity:after {
+  content: "";
+  box-shadow: 0 0 0 var(--b) inset #d8da82bb; /* the color */
+  height: var(--s);
+  aspect-ratio: 1;
+  border-radius: 50% 50% 0 50%;
+  rotate: -45deg;
+}
+.infinity:after {
+  scale: -1;
+}
+
+/* grid-speaker for robot ear */
+.grid-lines {
+  --s: 07px; /* control the size of the grid */
+  --t: 1px; /* the thickness */
+
+  background: conic-gradient(
+      from 90deg at var(--t) var(--t),
+      #0000 25%,
+      #556270 0
+    )
+    0 0 / var(--s) var(--s);
+
+  width: calc(round(down, 100%, var(--s)) + var(--t));
+  height: calc(4 * var(--s) + var(--t));
+}
+/* arc for earlobe */
+.arc {
+  --b: 4px; /* the boder thickness */
+  --a: 200deg; /* control the progression */
+
+  width: 55px;
+  aspect-ratio: 1;
+  padding: var(--b);
+  border-radius: 50%;
+  background: #d8c89d;
+  --_g: /var(--b) var(--b) no-repeat radial-gradient(50% 50%, #000 97%, #0000);
+  mask: top var(--_g),
+    calc(50% + 50% * sin(var(--a))) calc(50% - 50% * cos(var(--a))) var(--_g),
+    linear-gradient(#0000 0 0) content-box intersect,
+    conic-gradient(#000 var(--a), #0000 0);
+}
+
+
+
+/* eyes section */
+
+.eye-spec {
+  position: relative;
+  width: 8rem;
+  height: 4rem;
+  border: 3px inset rgb(58, 58, 44);
+  border-radius: 50%;
 }
 
 .robot-eye-left {
+  left: 85px;
+  top: 85px;
+  border-radius: 3px;
 }
 
 .robot-eye-right {
+  left: 325px;
+  top: 22px;
+}
+
+/* ears section */
+
+.ear-lobe {
+  position: absolute;
+  top: 27px;
 }
 
 .robot-ear-left {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  left: 37.5rem;
+  bottom: 20rem;
+  width: 75px;
+  height: 100px;
+  border: 2px outset;
+  border-color: #000 transparent #000 #000;
+  background-color: rgb(63, 65, 59);
+  padding: 5px;
+  gap: 3px;
+  place-items: center;
+}
+
+.speaker {
+  position: relative;
+  top: 8px;
+  border: 1px inset black;
+  width: 55%;
+  height: 40%;
+  border-radius: 50%;
+  background-color: #000000bd;
 }
 
 .robot-ear-right {
+  position: relative;
+  left: 77.5rem;
+  bottom: 28rem;
+  width: 70px;
+  height: 100px;
+  background-color: #d6ad6f;
+  border: 2px solid;
+  border-color: rgb(63, 65, 59) rgb(63, 65, 59) rgb(63, 65, 59) transparent;
+  border-radius: 0 35% 50% 0;
 }
 
 .robot-nose {
+  position: relative;
+  left: 227px;
+  top: 15px;
 }
 
+/* voice-box/mouth section */
+
 .robot-teeth {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  border: 3px inset rgb(58, 58, 44);
+  border-radius: 0 30% 30% 0;
+  overflow: clip;
+  left: 31%;
+  top: 61%;
+  box-sizing: border-box;
+}
+
+.tooth-box {
+  overflow: clip;
+  padding: 4px;
+  width: 100%;
+  height: 100%;
+  background: var(--comp-screen);
+}
+
+.teeth-top-row {
+  position: relative;
+  bottom: 8px;
+}
+
+.teeth-bottom-row {
+  position: relative;
+  top: 18px;
 }
 
 .robot-tooth {
+  display: inline-block;
+  position: relative;
+  width: 18px;
+  height: 34px;
+  border: 5px solid transparent;
+}
+.bot-col {
+  background: linear-gradient(
+    to top,
+    #ede1c5 0%,
+    /* stale enamel */ #c9ba9d 20%,
+    /* tartar tones */ #b8a379 40%,
+    /* gumline grime */ #5c4220 60%,
+    /* deep decay */ #1a1207 80% /* shadowy rot */
+  );
+  border-radius: 25% 25% 0 0;
 }
 
+.top-col {
+  background: linear-gradient(
+    to bottom,
+    #ede1c5 0%,
+    /* stale enamel */ #c9ba9d 20%,
+    /* tartar tones */ #b8a379 40%,
+    /* gumline grime */ #5c4220 60%,
+    /* deep decay */ #1a1207 80% /* shadowy rot */
+  );
+  border-radius: 0% 0 25% 25%;
+}
+
+/* hair section */
+
 .robot-hair-style {
+  
+  
 }
 
 .robot-hair-one {
