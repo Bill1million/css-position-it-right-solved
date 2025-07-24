@@ -26,6 +26,7 @@
   position: relative;
   margin: auto;
   box-sizing: border-box;
+  top: 30%;
 }
 
 .robot-face-shape {
@@ -40,7 +41,6 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 
 /* eyes spiral */
 .spiral {
@@ -146,7 +146,47 @@
     conic-gradient(#000 var(--a), #0000 0);
 }
 
+/* wifi for robo-hair*/
+.wifi-icon {
+  --n: 4; /* number of bars */
 
+  height: 130px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  --s: calc(100% / (2 * var(--n) - 1));
+  background: repeating-radial-gradient(
+    50% 50%,
+    #0000 0,
+    #178feb 1px calc(var(--s) - 1px),
+    #0000 var(--s) calc(2 * var(--s))
+  );
+  mask: conic-gradient(#000 0 0) no-repeat 50% / var(--s) var(--s),
+    conic-gradient(
+      from -45deg at 50% calc(50% + var(--s) / 2),
+      #000 90deg,
+      #0000 0
+    );
+}
+
+/* thunder for hair */
+
+.thunder {
+  height: 100px; /* control the size */
+  aspect-ratio: 0.56;
+  clip-path: polygon(
+    100% 0,
+    23% 46%,
+    46% 44%,
+    15% 69%,
+    38% 67%,
+    0 100%,
+    76% 57%,
+    53% 58%,
+    88% 33%,
+    60% 37%
+  );
+  background: #ff8001;
+}
 
 /* eyes section */
 
@@ -173,15 +213,15 @@
 
 .ear-lobe {
   position: absolute;
-  top: 27px;
+  top: 32px;
 }
 
 .robot-ear-left {
   display: flex;
   flex-direction: column;
   position: relative;
-  left: 37.5rem;
-  bottom: 20rem;
+  right: 18.5rem;
+  bottom: 5rem;
   width: 75px;
   height: 100px;
   border: 2px outset;
@@ -204,8 +244,8 @@
 
 .robot-ear-right {
   position: relative;
-  left: 77.5rem;
-  bottom: 28rem;
+  left: 21.5rem;
+  bottom: 10rem;
   width: 70px;
   height: 100px;
   background-color: #d6ad6f;
@@ -286,8 +326,13 @@
 /* hair section */
 
 .robot-hair-style {
-  
-  
+  position: relative;
+  left: 35%;
+  bottom: 58%;
+  z-index: 1;
+  background-color: pink; /* change this */
+  width: 30%;
+  height: 32%;
 }
 
 .robot-hair-one {
@@ -297,4 +342,5 @@
 }
 
 .robot-hair-three {
+
 }
