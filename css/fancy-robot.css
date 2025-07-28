@@ -23,20 +23,16 @@
 }
 
 .robot-container {
-  position: relative;
-  margin: auto;
-  box-sizing: border-box;
-  top: 30%;
+  position: fixed;
+  margin: 20% 25%;
 }
 
 .robot-face-shape {
-  position: absolute;
+  position: relative;
   border: 5px solid var(--zombie);
   border-radius: 5px 35% 35% 5px;
   width: 36rem;
   height: 20rem;
-  align-self: center;
-  justify-self: center;
   background: var(--flesh);
   background-repeat: no-repeat;
   background-size: cover;
@@ -188,6 +184,37 @@
   background: #ff8001;
 }
 
+/* wavy live for hair */
+
+.wavy-line {
+  --s: 4px; /* size of the wave */
+  --b: 6px; /* thickness of the line */
+  --m: 0.4; /* curvature of the wave [0 2] */
+
+  background: #008c9e;
+  --R: calc(var(--s) * sqrt(var(--m) * var(--m) + 1) + var(--b) / 2);
+  width: calc(2 * var(--R));
+  min-height: 250px;
+  --_g: #0000 calc(99% - var(--b)), #000 calc(101% - var(--b)) 99%, #0000 101%;
+  mask: radial-gradient(
+        var(--R) at top 50% right calc(-1 * var(--m) * var(--s)),
+        var(--_g)
+      )
+      calc(50% - var(--s) / 2 - var(--b) / 2) calc(50% - 2 * var(--s)) /
+      calc(var(--s) + var(--b)) calc(4 * var(--s)) repeat-y,
+    radial-gradient(
+        var(--R) at top 50% left calc(-1 * var(--m) * var(--s)),
+        var(--_g)
+      )
+      calc(50% + var(--s) / 2 + var(--b) / 2) 50% / calc(var(--s) + var(--b))
+      calc(4 * var(--s)) repeat-y;
+}
+
+.robot-eye-image {
+  background-image: url(https://miro.medium.com/v2/resize:fit:852/1*uAp4K4IuVOaJp6v4B99KSQ.jpeg);
+  background-size: cover;
+}
+
 /* eyes section */
 
 .eye-spec {
@@ -220,8 +247,8 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  right: 18.5rem;
-  bottom: 5rem;
+  right: 4.5rem;
+  bottom: 15rem;
   width: 75px;
   height: 100px;
   border: 2px outset;
@@ -244,8 +271,8 @@
 
 .robot-ear-right {
   position: relative;
-  left: 21.5rem;
-  bottom: 10rem;
+  left: 34.5rem;
+  bottom: 20rem;
   width: 70px;
   height: 100px;
   background-color: #d6ad6f;
@@ -326,21 +353,25 @@
 /* hair section */
 
 .robot-hair-style {
+  display: flex;
   position: relative;
-  left: 35%;
-  bottom: 58%;
-  z-index: 1;
-  background-color: pink; /* change this */
-  width: 30%;
-  height: 32%;
+  left: 2rem;
+  bottom: 37rem;
+  z-index: -1;
+  width: 506px;
+  height: 108px;
 }
 
+/* lightning bolt */
 .robot-hair-one {
+  position: relative;
 }
-
+/* wavy-line */
 .robot-hair-two {
+  position: relative;
+  padding: 0 32px;
 }
-
+/* wifi symbol */
 .robot-hair-three {
-
+  position: relative;
 }

@@ -1,4 +1,5 @@
 .legal-header {
+  position: fixed;
   background-color: #e2e2e2;
   padding: 30px;
   margin-top: 60px;
@@ -11,7 +12,8 @@
   margin: 0 auto;
 }
 
-main {
+main { 
+  position: static; 
 }
 
 section {
@@ -52,7 +54,7 @@ section {
   line-height: 28px;
 }
 
-footer {
+footer { 
   display: flex;
   align-items: center;
   width: 100%;
